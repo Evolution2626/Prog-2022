@@ -8,7 +8,9 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DrivetrainDriveCommand;
+import frc.robot.commands.GobeurTournerCommand;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Gobeur;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,7 +22,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
   private final Drivetrain drivetrain = new Drivetrain();
-
+  private final Gobeur gobeur = new Gobeur();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -28,6 +30,7 @@ public class RobotContainer {
     // Configure the button bindings
 
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
+    gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, driverController));
     configureButtonBindings();
   }
 
