@@ -37,24 +37,26 @@ public class DrivetrainDriveCommand extends CommandBase {
   @Override
   public void execute() {
     if(RobotState.isTeleop()){
-      double speedRight = -controller.getRawAxis(Constants.AXES.RIGHT_Y_AXIS);
+      double speedRight = -controller.getRightY();
       speedRight = Range.threshold(.1, speedRight);
       speedRight = Math.pow(speedRight, 3);
-      double speedLeft = -controller.getRawAxis(Constants.AXES.LEFT_Y_AXIS);
+      double speedLeft = -controller.getLeftY();
       speedLeft = Range.threshold(.1, speedLeft);
       speedLeft = Math.pow(speedLeft, 3);
       if (controller.getRawButton(Button.kLeftBumper.value)) {
         drivetrain.driveTank(speedLeft * .3, speedRight * .3);
       }else {
         drivetrain.driveTank(speedLeft, speedRight);
-        
       }
     }
     
   }
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+
+  }
 
   // Returns true when the command should end.
   @Override

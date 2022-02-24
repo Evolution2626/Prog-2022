@@ -15,11 +15,12 @@ package frc.robot;
 public final class Constants {
 
     public interface CAN{
-        int FRONT_RIGHT_MOTOR = 0;
-        int FRONT_LEFT_MOTOR = 0;
-        int BACK_RIGHT_MOTOR = 0;
-        int BACK_LEFT_MOTOR = 0;
+        int FRONT_RIGHT_MOTOR = 31;
+        int FRONT_LEFT_MOTOR = 10;
+        int BACK_RIGHT_MOTOR = 32;
+        int BACK_LEFT_MOTOR = 12;
         int MOTOR_WINCH = 0;
+        int MOTOR_GOBEUR = 3;
 
     }
 
@@ -28,13 +29,9 @@ public final class Constants {
         int CO_DRIVER_CONTROLLER = 1;
         
     }
+    public interface PCM{
+        int PISTON_FORWARD = 0;
+        int PISTON_REVERSE = 1;
 
-    public interface AXES{
-
-        int RIGHT_Y_AXIS = 0;
-        int LEFT_Y_AXIS = 0;
     }
-
-    
-
 }

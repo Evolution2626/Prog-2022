@@ -25,9 +25,9 @@ public class Drivetrain extends SubsystemBase {
     backLeft = new CANSparkMax(Constants.CAN.BACK_LEFT_MOTOR, MotorType.kBrushless);
 
 
-    frontRight.setInverted(false);
+    frontRight.setInverted(true);
     frontLeft.setInverted(false);
-    backRight.setInverted(false);
+    backRight.setInverted(true);
     backLeft.setInverted(false);
 
     frontRight.setIdleMode(IdleMode.kBrake);
@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase {
     frontRight.follow(backRight);
     frontLeft.follow(backLeft);
 
-    setAllCurrentLimit(25, 20);
+    setAllCurrentLimit(40, 40);
 
     resetEncoder();
 
