@@ -7,6 +7,10 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -17,6 +21,8 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax backRight;
   private CANSparkMax backLeft;
 
+  private Gyro gyro = new ADXRS450_Gyro();
+
   public Drivetrain() {
 
     frontRight = new CANSparkMax(Constants.CAN.FRONT_RIGHT_MOTOR, MotorType.kBrushless);
@@ -24,6 +30,7 @@ public class Drivetrain extends SubsystemBase {
     backRight = new CANSparkMax(Constants.CAN.BACK_RIGHT_MOTOR, MotorType.kBrushless);
     backLeft = new CANSparkMax(Constants.CAN.BACK_LEFT_MOTOR, MotorType.kBrushless);
 
+    gyro = new ADXRS450_Gyro();
 
     frontRight.setInverted(true);
     frontLeft.setInverted(false);
@@ -46,6 +53,7 @@ public class Drivetrain extends SubsystemBase {
     setAllCurrentLimit(40, 40);
 
     resetEncoder();
+    resetGyro();
 
   }
 
@@ -63,13 +71,46 @@ public class Drivetrain extends SubsystemBase {
     backLeft.getEncoder().setPosition(0);
   }
 
+  public double getLeftEncodersPosition(){
+    return ((frontLeft.getEncoder().getPosition() + backLeft.getEncoder().getPosition()) /2);
+  }
+
+  public double getRightEncodersPosition(){
+    return ((frontRight.getEncoder().getPosition() + backRight.getEncoder().getPosition()) /2);
+  }
+
+  public double getLeftEncoderPositionCm(){
+    return getLeftEncodersPosition() / 10.71 * (Math.PI * 6 * 2.54); // circonference des roues
+  }
+
+  public double getRightEncoderPositionCm(){
+    return getRightEncodersPosition() / 10.71 * (Math.PI * 6 * 2.54); // circonference des roues
+  }
+
+  public double getBothEncoderPositionCm(){
+    return ((getRightEncoderPositionCm() + getLeftEncoderPositionCm()) /2);
+  }
+
   public void driveTank(double left, double right){
     backRight.set(right);
     backLeft.set(left);
   }
 
+  public void resetGyro(){
+    gyro.reset();
+  }
+
+  public double getGyroAngle(){
+    return gyro.getAngle();
+  }
+
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+    SmartDashboard.putNumber("Encoder Left", getLeftEncodersPosition());
+    SmartDashboard.putNumber("Encoder Right", getRightEncodersPosition());
+    SmartDashboard.putNumber("GyroAngle", getGyroAngle());
   }
 }
