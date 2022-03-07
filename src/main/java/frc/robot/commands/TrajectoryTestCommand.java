@@ -20,7 +20,6 @@ import frc.robot.subsystems.Drivetrain;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
-  private Drivetrain drivetrain;
   public TrajectoryTestCommand(Drivetrain drivetrain) {
     super(drivetrain, 
       TrajectoryGenerator.generateTrajectory(
@@ -45,7 +44,6 @@ public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
       )
     );
     // Use addRequirements() here to declare subsystem dependencies.
-    this.drivetrain = drivetrain;
   }
 
   // Called when the command is initially scheduled.
