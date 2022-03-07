@@ -15,23 +15,39 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
  
-  private TalonSRX winch; 
-  private DoubleSolenoid piston;
+  private TalonSRX[] winch = new TalonSRX[4];
+  private DoubleSolenoid pistonLeft;
+  private DoubleSolenoid pistonRight;
+
   /** Creates a new Climber. */
   public Climber() {
 
-    winch = new TalonSRX(Constants.CAN.MOTOR_WINCH);
-    piston = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCM.PISTON_FORWARD, Constants.PCM.PISTON_REVERSE);
+    
+    for(int i = 0; i < 4; i++){
+      winch[i] = new TalonSRX(Constants.CAN.MOTORS_WINCH[i]);
+    }
+    
+    pistonLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCM.PISTON_LEFT_FORWARD, Constants.PCM.PISTON_LEFT_REVERSE);
+    pistonRight = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCM.PISTON_RIGHT_FORWARD, Constants.PCM.PISTON_RIGHT_REVERSE);
+
   }
 
 
-  public void tournerWinch(double speed){
-    winch.set(ControlMode.PercentOutput, speed);
+  public void tournerWinchSpring(double speed){
+    winch[0].set(ControlMode.PercentOutput, speed);
+    winch[1].set(ControlMode.PercentOutput, speed);
 
+  }
+
+  public void tournerWinchPiston(double speed){
+    winch[2].set(ControlMode.PercentOutput, speed);
+    winch[3].set(ControlMode.PercentOutput, speed);
   }
 
   public void setPistonPosition(Value position){
-    piston.set(position);
+    pistonLeft.set(position);
+    pistonRight.set(position);
+
   }
 
 
