@@ -8,7 +8,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -20,8 +25,10 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeft;
   private CANSparkMax backRight;
   private CANSparkMax backLeft;
+  
+  private DifferentialDriveOdometry odometry;
 
-  private Gyro gyro = new ADXRS450_Gyro();
+  private Gyro gyro;
 
   public Drivetrain() {
 
@@ -30,7 +37,7 @@ public class Drivetrain extends SubsystemBase {
     backRight = new CANSparkMax(Constants.CAN.BACK_RIGHT_MOTOR, MotorType.kBrushless);
     backLeft = new CANSparkMax(Constants.CAN.BACK_LEFT_MOTOR, MotorType.kBrushless);
 
-    gyro = new ADXRS450_Gyro();
+    gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
     frontRight.setInverted(true);
     frontLeft.setInverted(false);
@@ -55,6 +62,10 @@ public class Drivetrain extends SubsystemBase {
     resetEncoder();
     resetGyro();
 
+    backLeft.getEncoder().setVelocityConversionFactor(0.0447);
+    backRight.getEncoder().setVelocityConversionFactor(0.0447);
+
+    odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
   }
 
   public void setAllCurrentLimit(int stall, int free){
@@ -91,9 +102,19 @@ public class Drivetrain extends SubsystemBase {
     return ((getRightEncoderPositionCm() + getLeftEncoderPositionCm()) /2);
   }
 
+  public DifferentialDriveWheelSpeeds getWheelSpeed(){
+    return new DifferentialDriveWheelSpeeds(backLeft.getEncoder().getVelocity()/60, backRight.getEncoder().getVelocity()/60);
+    //retrun wheels speed in meters/second
+  }
+
   public void driveTank(double left, double right){
     backRight.set(right);
     backLeft.set(left);
+  }
+
+  public void driveTankVolts(double left, double right){
+    backLeft.setVoltage(left);
+    backRight.setVoltage(right);
   }
 
   public void resetGyro(){
@@ -104,11 +125,24 @@ public class Drivetrain extends SubsystemBase {
     return gyro.getAngle();
   }
 
+  public double getHeading(){
+    return gyro.getRotation2d().getDegrees();
+  }
+
+  public Pose2d getPose(){
+    return odometry.getPoseMeters();
+  }
+
+  public void resetOdometry(Pose2d pose){
+    resetEncoder();
+    resetGyro();
+    odometry.resetPosition(pose, gyro.getRotation2d());
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
+    odometry.update(gyro.getRotation2d(), getLeftEncoderPositionCm() / 100, getRightEncoderPositionCm() / 100);
     SmartDashboard.putNumber("Encoder Left", getLeftEncodersPosition());
     SmartDashboard.putNumber("Encoder Right", getRightEncodersPosition());
     SmartDashboard.putNumber("GyroAngle", getGyroAngle());

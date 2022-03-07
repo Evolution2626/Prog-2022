@@ -6,12 +6,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
+import frc.robot.commands.SetPistonCommand;
+import frc.robot.commands.TournerWinchsCommand;
+import frc.robot.commands.TrajectoryTestCommand;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
 
@@ -26,15 +31,20 @@ public class RobotContainer {
 
   private final Drivetrain drivetrain = new Drivetrain();
   private final Gobeur gobeur = new Gobeur();
+  private final Climber climber = new Climber();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
+  private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
 
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
-    gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, driverController));
+    gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, coDriverController));
+    climber.setDefaultCommand(new TournerWinchsCommand(climber, coDriverController));
     configureButtonBindings();
+  
   }
 
   /**
@@ -46,6 +56,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
 
     new JoystickButton(driverController, Button.kA.value).whenPressed(new AvancerCmCommand(drivetrain, 200));
+    new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
+    new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
+    new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain));
 
   }
 

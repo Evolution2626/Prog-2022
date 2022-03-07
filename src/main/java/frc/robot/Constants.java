@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -15,12 +17,12 @@ package frc.robot;
 public final class Constants {
 
     public interface CAN{
-        int FRONT_RIGHT_MOTOR = 31;
-        int FRONT_LEFT_MOTOR = 10;
-        int BACK_RIGHT_MOTOR = 32;
-        int BACK_LEFT_MOTOR = 12;
-        int MOTOR_WINCH = 0;
-        int MOTOR_GOBEUR = 3;
+        int FRONT_RIGHT_MOTOR = 4;
+        int FRONT_LEFT_MOTOR = 3;
+        int BACK_RIGHT_MOTOR = 14;
+        int BACK_LEFT_MOTOR = 2;
+        int[] MOTORS_WINCH = {0, 0, 0, 0};
+        int MOTOR_GOBEUR = 0;
 
     }
 
@@ -30,8 +32,27 @@ public final class Constants {
         
     }
     public interface PCM{
-        int PISTON_FORWARD = 0;
-        int PISTON_REVERSE = 1;
+        int PISTON_LEFT_FORWARD = 0;
+        int PISTON_LEFT_REVERSE = 1;
+        int PISTON_RIGHT_FORWARD = 2;
+        int PISTON_RIGHT_REVERSE = 3;
 
+    }
+
+    public interface CARACTERISATION {
+        double ksVolts = 0.25831;
+        double kvVoltsPerMeter = 1.3573;
+        double kaVoltsSquarePerMeter = 0.21281;
+
+        double kpDriveVelocity = 1.8168;
+        double trackWidthMeters = 0.605;
+
+        DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(trackWidthMeters);
+
+        double kMaxSpeedMetersPerSecond = 1;
+        double kMaxAccelerationMetersPerSecondSquared = 1;
+
+        double kRamseteB = 2;
+        double kRamseteZeta = 0.7;
     }
 }
