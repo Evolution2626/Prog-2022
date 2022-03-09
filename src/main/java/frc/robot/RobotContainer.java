@@ -58,7 +58,7 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kA.value).whenPressed(new AvancerCmCommand(drivetrain, 200));
     new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
     new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
-    new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain));
+    new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
 
   }
 

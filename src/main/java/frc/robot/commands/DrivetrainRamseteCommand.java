@@ -11,6 +11,7 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants.CARACTERISATION;
 import frc.robot.subsystems.Drivetrain;
+import frc.util.TrajectoryLoader;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -35,6 +36,14 @@ public class DrivetrainRamseteCommand extends RamseteCommand {
       this.drivetrain = drivetrain;
       this.trajectory = trajectory;
       this.resetPosition = true;
+  }
+
+  public DrivetrainRamseteCommand(Drivetrain drivetrain, String path){
+    this(drivetrain, TrajectoryLoader.getTrajectory(path));
+  }
+
+  public DrivetrainRamseteCommand(Drivetrain drivetrain, String... paths){
+    this(drivetrain, TrajectoryLoader.getTrajectory(paths));
   }
 
   public DrivetrainRamseteCommand robotRelative(){

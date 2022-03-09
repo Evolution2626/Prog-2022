@@ -4,20 +4,15 @@
 
 package frc.robot.commands;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-import edu.wpi.first.wpilibj.Filesystem;
 import frc.robot.Constants.CARACTERISATION;
 import frc.robot.subsystems.Drivetrain;
 
@@ -25,24 +20,11 @@ import frc.robot.subsystems.Drivetrain;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
-  public static String trajectoryJSON = "paths/YourPath.wpilib.json";
-
-  public static Trajectory getTrajectory(String trajectoryJSON){
-    
-    Trajectory trajectory = new Trajectory();
-    try {
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    return trajectory;
-  }
+  public static String trajectoryJSON = "Test.wpilib.json";
 
   public TrajectoryTestCommand(Drivetrain drivetrain) {
-    super(drivetrain, 
-      TrajectoryGenerator.generateTrajectory(
+    super(drivetrain, trajectoryJSON
+      /*TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)), 
         List.of(
           new Translation2d(2, 0), 
@@ -69,7 +51,7 @@ public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
             10
           )
         )
-      )
+      )*/
     );
     // Use addRequirements() here to declare subsystem dependencies.
   }
