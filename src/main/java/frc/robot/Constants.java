@@ -40,11 +40,11 @@ public final class Constants {
     }
 
     public interface CARACTERISATION {
-        double ksVolts = 0.25831;
-        double kvVoltsPerMeter = 1.3573;
-        double kaVoltsSquarePerMeter = 0.21281;
+        double ksVolts = 0.23372;
+        double kvVoltsPerMeter = 3.0244;
+        double kaVoltsSquarePerMeter = 0.36913;
 
-        double kpDriveVelocity = 1.8168;
+        double kpDriveVelocity = 0.00061519;
         double trackWidthMeters = 0.605;
 
         DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(trackWidthMeters);

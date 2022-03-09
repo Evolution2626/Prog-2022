@@ -61,8 +61,8 @@ public class Drivetrain extends SubsystemBase {
     resetEncoder();
     resetGyro();
 
-    backLeft.getEncoder().setVelocityConversionFactor(0.0447);
-    backRight.getEncoder().setVelocityConversionFactor(0.0447);
+    backLeft.getEncoder().setVelocityConversionFactor(0.0699);
+    backRight.getEncoder().setVelocityConversionFactor(0.0699);
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
   }
@@ -90,11 +90,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getLeftEncoderPositionCm(){
-    return getLeftEncodersPosition() / 10.71 * (Math.PI * 6 * 2.54); // circonference des roues
+    return getLeftEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
   }
 
   public double getRightEncoderPositionCm(){
-    return getRightEncodersPosition() / 10.71 * (Math.PI * 6 * 2.54); // circonference des roues
+    return getRightEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
   }
 
   public double getBothEncoderPositionCm(){
@@ -145,5 +145,9 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Encoder Left", getLeftEncodersPosition());
     SmartDashboard.putNumber("Encoder Right", getRightEncodersPosition());
     SmartDashboard.putNumber("GyroAngle", getGyroAngle());
+    SmartDashboard.putNumber("GyroAngle2D", getHeading());
+    SmartDashboard.putNumber("Pose2d X", getPose().getX());
+    SmartDashboard.putNumber("Pose2d Y", getPose().getY());
+
   }
 }
