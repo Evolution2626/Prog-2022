@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AlignTapeCommand;
+import frc.robot.commands.AlignTapePIDCommand;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
@@ -19,6 +21,7 @@ import frc.robot.commands.TrajectoryTestCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
+import frc.robot.subsystems.Limelight;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -32,6 +35,7 @@ public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain();
   private final Gobeur gobeur = new Gobeur();
   private final Climber climber = new Climber();
+  private final Limelight limelight = new Limelight();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
 
@@ -59,6 +63,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
     new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
     new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
+    new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
 
   }
 

@@ -39,6 +39,10 @@ public final class Constants {
 
     }
 
+    public interface GAMES_CONSTANTS{
+        int CAMERA_HEIGHT = 0;
+    }
+
     public interface CARACTERISATION {
         double ksVolts = 0.23372;
         double kvVoltsPerMeter = 3.0244;

@@ -13,6 +13,7 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI.Port;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,6 +27,8 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax backLeft;
   
   private DifferentialDriveOdometry odometry;
+
+  private DifferentialDrive drive;
 
   private Gyro gyro;
 
@@ -65,6 +68,8 @@ public class Drivetrain extends SubsystemBase {
     backRight.getEncoder().setVelocityConversionFactor(0.0699);
 
     odometry = new DifferentialDriveOdometry(gyro.getRotation2d());
+
+    drive = new DifferentialDrive(backLeft, backRight);
   }
 
   public void setAllCurrentLimit(int stall, int free){
@@ -104,6 +109,10 @@ public class Drivetrain extends SubsystemBase {
   public DifferentialDriveWheelSpeeds getWheelSpeed(){
     return new DifferentialDriveWheelSpeeds(backLeft.getEncoder().getVelocity()/60, backRight.getEncoder().getVelocity()/60);
     //retrun wheels speed in meters/second
+  }
+
+  public void arcadeDrive(double rotation){
+    drive.arcadeDrive(0, rotation);
   }
 
   public void driveTank(double left, double right){
