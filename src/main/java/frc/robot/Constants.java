@@ -23,7 +23,8 @@ public final class Constants {
         int BACK_LEFT_MOTOR = 2;
         int[] MOTORS_WINCH = {0, 0, 0, 0};
         int MOTOR_GOBEUR = 0;
-
+        int MOTEUR_LANCEUR_UN = 0;
+        int MOTEUR_LANCEUR_DEUX = 0;
     }
 
     public interface USB{
