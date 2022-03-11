@@ -111,8 +111,8 @@ public class Drivetrain extends SubsystemBase {
     //retrun wheels speed in meters/second
   }
 
-  public void arcadeDrive(double rotation){
-    drive.arcadeDrive(0, rotation);
+  public void arcadeDrive(double speed, double rotation){
+    drive.arcadeDrive(speed, rotation);
   }
 
   public void driveTank(double left, double right){

@@ -20,7 +20,7 @@ public class AlignTapePIDCommand extends PIDCommand {
   public AlignTapePIDCommand(Drivetrain drivetrain, Limelight limelight) {
     super(
         // The controller that the command will use
-        new PIDController(0.05, 0.05, 0.025),
+        new PIDController(0.05, 0.05, 0.002),
         // This should return the measurement
         () -> limelight.getdegRotationToTarget(),
         // This should return the setpoint (can also be a constant)
@@ -28,7 +28,7 @@ public class AlignTapePIDCommand extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          drivetrain.arcadeDrive(-output);
+          drivetrain.arcadeDrive(0, -output);
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
@@ -45,7 +45,7 @@ public class AlignTapePIDCommand extends PIDCommand {
   @Override
   public void end(boolean interrupted){
     super.end(interrupted);
-    drivetrain.arcadeDrive(0);  
+    drivetrain.arcadeDrive(0,0);  
   }
 
   // Returns true when the command should end.

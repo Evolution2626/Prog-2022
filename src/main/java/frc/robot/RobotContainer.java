@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignTapeCommand;
 import frc.robot.commands.AlignTapePIDCommand;
+import frc.robot.commands.AllerVersBallonCommand;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
@@ -64,7 +65,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
     new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
     new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
-
+    new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
   }
 
   /**
