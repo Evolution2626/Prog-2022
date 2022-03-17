@@ -15,6 +15,14 @@ public class Lanceur extends SubsystemBase {
 
   private CANSparkMax moteurUn;
   private CANSparkMax moteurDeux;
+  private static double lanceurHeight = 0;
+  private static double lanceurAngle = 65;
+  private static double wheelDiametersInch = 3;
+
+  public enum TargetHeight {
+    LOW,
+    HIGH
+  }
 
   /** Creates a new Lanceur. */
   public Lanceur() {
@@ -44,6 +52,28 @@ public class Lanceur extends SubsystemBase {
 
   public double getEncodersVelocity(){
     return (getEncoderUnVelocity() + getEncoderDeuxVelocity()) / 2;
+  }
+
+  public double getBallMetersPerSecond(double distanceMeters, TargetHeight targetHeight){
+
+    double targetHeightDouble;
+
+    if (targetHeight ==  TargetHeight.LOW) {
+      targetHeightDouble = 1.04;
+    } else {
+      targetHeightDouble = 2.64;
+    }
+
+
+    double ballSpeed = Math.sqrt((-9.81 * Math.pow(distanceMeters, 2)) / 
+                        (2 * Math.pow(Math.cos(lanceurAngle), 2)) * (((targetHeightDouble - Math.tan(lanceurAngle)) * (distanceMeters)-lanceurHeight)));
+    return ballSpeed;
+
+  }
+
+  public double getLanceurDesiredSpeedRPM(double distanceMeters, TargetHeight targetHeight){
+
+    return ((getBallMetersPerSecond(distanceMeters, targetHeight)) * 60) / (2.54 * wheelDiametersInch * Math.PI / 100);
   }
 
   @Override
