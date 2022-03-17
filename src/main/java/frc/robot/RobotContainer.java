@@ -17,6 +17,7 @@ import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
 import frc.robot.commands.SetPistonCommand;
+import frc.robot.commands.SetPistonGobeurCommand;
 import frc.robot.commands.TournerWinchsCommand;
 import frc.robot.commands.TrajectoryTestCommand;
 import frc.robot.subsystems.Climber;
@@ -66,6 +67,10 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
     new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
     new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
+    new JoystickButton(coDriverController, Button.kB.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
+    new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
+    
+
   }
 
   /**

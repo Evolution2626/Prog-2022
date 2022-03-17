@@ -7,11 +7,15 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Gobeur extends SubsystemBase {
   private TalonSRX gobeur;
+  private DoubleSolenoid pistonLeft;
+  private DoubleSolenoid pistonRight;
   /** Creates a new Gobeur. */
   public Gobeur() {
     gobeur = new TalonSRX(Constants.CAN.MOTOR_GOBEUR);
@@ -23,7 +27,11 @@ public class Gobeur extends SubsystemBase {
 
   }
 
+  public void setPistonPosition(Value position){
+    pistonLeft.set(position);
+    pistonRight.set(position);
 
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
