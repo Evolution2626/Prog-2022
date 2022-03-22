@@ -157,6 +157,7 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("GyroAngle2D", getHeading());
     SmartDashboard.putNumber("Pose2d X", getPose().getX());
     SmartDashboard.putNumber("Pose2d Y", getPose().getY());
+    SmartDashboard.putNumber("Encoder cm", getBothEncoderPositionCm());
 
   }
 }
