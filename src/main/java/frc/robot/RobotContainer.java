@@ -10,19 +10,20 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AlignTapeCommand;
 import frc.robot.commands.AlignTapePIDCommand;
 import frc.robot.commands.AllerVersBallonCommand;
-import frc.robot.commands.AvancerCmCommand;
+import frc.robot.commands.DivetrainTournerDegresCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
 import frc.robot.commands.SetPistonCommand;
 import frc.robot.commands.SetPistonGobeurCommand;
+import frc.robot.commands.ShooterBallCommand;
 import frc.robot.commands.TournerWinchsCommand;
 import frc.robot.commands.TrajectoryTestCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
+import frc.robot.subsystems.Lanceur;
 import frc.robot.subsystems.Limelight;
 
 /**
@@ -38,6 +39,7 @@ public class RobotContainer {
   private final Gobeur gobeur = new Gobeur();
   private final Climber climber = new Climber();
   private final Limelight limelight = new Limelight();
+  private final Lanceur lanceur = new Lanceur();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
 
@@ -48,7 +50,7 @@ public class RobotContainer {
 
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, coDriverController));
-    climber.setDefaultCommand(new TournerWinchsCommand(climber, coDriverController));
+    climber.setDefaultCommand(new TournerWinchsCommand(climber, driverController));
     configureButtonBindings();
   
   }
@@ -61,7 +63,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(driverController, Button.kA.value).whenPressed(new AvancerCmCommand(drivetrain, 200));
+    new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 90));
     new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
     new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
     new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
@@ -69,6 +71,8 @@ public class RobotContainer {
     new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
+    new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
+    
     
 
   }

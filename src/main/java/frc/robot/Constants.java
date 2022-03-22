@@ -21,7 +21,7 @@ public final class Constants {
         int FRONT_LEFT_MOTOR = 3;
         int BACK_RIGHT_MOTOR = 14;
         int BACK_LEFT_MOTOR = 2;
-        int[] MOTORS_WINCH = {0, 0, 0, 0};
+        int[] MOTORS_WINCH = {10, 5, 6, 7};
         int MOTOR_GOBEUR = 0;
         int MOTEUR_LANCEUR_UN = 0;
         int MOTEUR_LANCEUR_DEUX = 0;

@@ -28,11 +28,11 @@ public class TournerWinchsCommand extends CommandBase {
   @Override
   public void execute() {
     double speedSpring;
-    speedSpring = controller.getLeftY();
+    speedSpring = (controller.getLeftTriggerAxis() + -controller.getRightTriggerAxis());
     climber.tournerWinchSpring(speedSpring);
-    double speedPiston;
+    /*double speedPiston;
     speedPiston = controller.getRightY();
-    climber.tournerWinchPiston(speedPiston);
+    climber.tournerWinchPiston(speedPiston);*/
   }
 
   // Called once the command ends or is interrupted.
