@@ -29,6 +29,10 @@ public class Range{
         return number;
     }
 
+    public static double coerce(double max, double number){
+        return coerce(-max, max, number);
+    }
+
     public static double minCoerce(double threshold, double number){
         if (number == 0) return 0;
         if (inRange(-threshold, threshold, number)){

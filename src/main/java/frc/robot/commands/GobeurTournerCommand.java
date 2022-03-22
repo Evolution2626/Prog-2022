@@ -14,11 +14,22 @@ public class GobeurTournerCommand extends CommandBase {
      */
     private Gobeur gobeur;
     private XboxController controller;
+    private double speed;
   /** Creates a new GobeurTournerCommand. */
   public GobeurTournerCommand(Gobeur gobeur, XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.controller = controller;
     this.gobeur = gobeur;
+    this.speed = 0;
+    addRequirements(gobeur);
+
+  }
+
+  public GobeurTournerCommand(Gobeur gobeur, double speed) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.speed = speed;
+    this.gobeur = gobeur;
+    this.controller = null;
     addRequirements(gobeur);
 
   }
@@ -33,11 +44,14 @@ public class GobeurTournerCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speedLeft = controller.getLeftTriggerAxis();
-    double speedRight = controller.getRightTriggerAxis();
-    double speed = speedRight - speedLeft;
+    double speedController = speed;
+    if (controller != null ) {
+      double speedLeft = controller.getLeftTriggerAxis();
+      double speedRight = controller.getRightTriggerAxis();
+      speedController = speedRight - speedLeft;
+    }
 
-    gobeur.tournerGobeur(speed);
+    gobeur.tournerGobeur(speedController);
 
   }
 
