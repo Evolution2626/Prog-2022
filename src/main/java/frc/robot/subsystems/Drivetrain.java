@@ -41,10 +41,10 @@ public class Drivetrain extends SubsystemBase {
 
     gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
-    frontRight.setInverted(true);
-    frontLeft.setInverted(false);
-    backRight.setInverted(true);
-    backLeft.setInverted(false);
+    frontRight.setInverted(false); // sur vrai robot true
+    frontLeft.setInverted(true); // sur vrai robot false
+    backRight.setInverted(true); // sur vrai robot true
+    backLeft.setInverted(false); 
 
     frontRight.setIdleMode(IdleMode.kBrake);
     frontLeft.setIdleMode(IdleMode.kBrake);

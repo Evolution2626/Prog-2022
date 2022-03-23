@@ -72,7 +72,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
     new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
-    
+  
     
 
   }

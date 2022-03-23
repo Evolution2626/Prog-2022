@@ -19,7 +19,7 @@ public class DivetrainTournerDegresCommand extends PIDCommand {
   public DivetrainTournerDegresCommand(Drivetrain drivetrain, double degrees) {
     super(
         // The controller that the command will use
-        new PIDController(0.012, 0.0046, 0),
+        new PIDController(0.012, 0.0046, 0.0001),
         // This should return the measurement
         () -> drivetrain.getGyroAngle(),
         // This should return the setpoint (can also be a constant)
