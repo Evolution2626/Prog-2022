@@ -43,7 +43,7 @@ public class Drivetrain extends SubsystemBase {
 
     frontRight.setInverted(false); // sur vrai robot true
     frontLeft.setInverted(true); // sur vrai robot false
-    backRight.setInverted(true); // sur vrai robot true
+    backRight.setInverted(true); 
     backLeft.setInverted(false); 
 
     frontRight.setIdleMode(IdleMode.kBrake);
