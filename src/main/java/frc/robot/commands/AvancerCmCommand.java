@@ -18,7 +18,7 @@ public class AvancerCmCommand extends PIDCommand {
   public AvancerCmCommand(Drivetrain drivetrain, double distanceCibleCM) {
     super(
         // The controller that the command will use
-        new PIDController(0.008, 0, 0),
+        new PIDController(0.001, 0.0005, 0.0000),
         // This should return the measurement
         () -> drivetrain.getBothEncoderPositionCm(),
         // This should return the setpoint (can also be a constant)
@@ -27,9 +27,10 @@ public class AvancerCmCommand extends PIDCommand {
         output -> {
           // Use the output here
           
-          drivetrain.driveTank(Range.minCoerce(0.10, Range.coerce(0.25, output)), Range.minCoerce(0.10, Range.coerce(0.25, output)) );
+          drivetrain.driveTank(output, output);
+        
         });
-
+      
         this.drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.

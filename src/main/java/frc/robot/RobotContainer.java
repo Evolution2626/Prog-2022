@@ -21,6 +21,7 @@ import frc.robot.commands.SetPistonGobeurCommand;
 import frc.robot.commands.ShooterBallCommand;
 import frc.robot.commands.TournerWinchsCommand;
 import frc.robot.commands.TrajectoryTestCommand;
+import frc.robot.commands.autonomous.AutoTestCommand;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
@@ -64,7 +65,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 90));
+    new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 180));
     new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
     new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
     new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
@@ -74,8 +75,8 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
     new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
     
-  
-    
+                  
+                          
 
   }
 
@@ -87,6 +88,6 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return new AutoTestCommand(drivetrain);
   }
 }

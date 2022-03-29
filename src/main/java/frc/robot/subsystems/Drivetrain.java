@@ -95,11 +95,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getLeftEncoderPositionCm(){
-    return getLeftEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
+    return getLeftEncodersPosition() / 10.71 * (Math.PI * 5.5715* 2.54); // circonference des roues
   }
 
   public double getRightEncoderPositionCm(){
-    return getRightEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
+    return getRightEncodersPosition() / 10.71 * (Math.PI * 5.5715* 2.54); // circonference des roues
   }
 
   public double getBothEncoderPositionCm(){
