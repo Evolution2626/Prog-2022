@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    compressor.enableAnalog(0, 120);
+    compressor.enableAnalog(60, 120);
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
-    compressor.enableAnalog(0, 120);
+    compressor.enableAnalog(60, 120);
 
     CommandScheduler.getInstance().cancelAll();
   }

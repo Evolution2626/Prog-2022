@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -30,6 +31,7 @@ public class Climber extends SubsystemBase {
     
     for(int i = 0; i < 2; i++){
       winch[i] = new CANSparkMax(Constants.CAN.MOTORS_WINCH[i], MotorType.kBrushless);
+      winch[i].setIdleMode(IdleMode.kBrake);
     }
     
 
