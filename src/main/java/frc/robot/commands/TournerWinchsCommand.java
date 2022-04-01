@@ -27,9 +27,26 @@ public class TournerWinchsCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speedSpring;
-    speedSpring = (controller.getLeftTriggerAxis() + -controller.getRightTriggerAxis());
-    climber.tournerWinchSpring(speedSpring);
+    double speedSpring0 = controller.getLeftTriggerAxis();
+
+    if (controller.getLeftBumper()) {
+
+      speedSpring0 *= -1;
+
+    }
+
+    double speedSpring1 = controller.getRightTriggerAxis();
+
+    if(controller.getRightBumper()) {
+
+      speedSpring1 *= -1;
+
+    }
+
+
+    climber.tournerWinch(0, speedSpring0);
+    climber.tournerWinch(1, speedSpring1);
+
     /*double speedPiston;
     speedPiston = controller.getRightY();
     climber.tournerWinchPiston(speedPiston);*/

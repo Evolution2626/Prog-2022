@@ -16,9 +16,10 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
  
-  private CANSparkMax[] winch = new CANSparkMax[4];
+  private CANSparkMax[] winch = new CANSparkMax[2];
   private DoubleSolenoid pistonLeft;
   private DoubleSolenoid pistonRight;
+  private Value pistonPosition;
 
   
 
@@ -27,20 +28,20 @@ public class Climber extends SubsystemBase {
   public Climber() {
 
     
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < 2; i++){
       winch[i] = new CANSparkMax(Constants.CAN.MOTORS_WINCH[i], MotorType.kBrushless);
     }
     
 
-    pistonLeft = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCM.PISTON_LEFT_FORWARD, Constants.PCM.PISTON_LEFT_REVERSE);
-    pistonRight = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCM.PISTON_RIGHT_FORWARD, Constants.PCM.PISTON_RIGHT_REVERSE);
+    pistonLeft = new DoubleSolenoid(8, PneumaticsModuleType.REVPH, Constants.PCM.PISTON_LEFT_FORWARD, Constants.PCM.PISTON_LEFT_REVERSE);
+    pistonRight = new DoubleSolenoid(8, PneumaticsModuleType.REVPH, Constants.PCM.PISTON_RIGHT_FORWARD, Constants.PCM.PISTON_RIGHT_REVERSE);
 
   }
 
 
-  public void tournerWinchSpring(double speed){
+  public void tournerWinch(int numeroWinch, double speed){
 
-    winch[0].set(speed);
+    winch[numeroWinch].set(speed);
     //winch[1].set(ControlMode.PercentOutput, speed);
     SmartDashboard.putNumber("Vitesse winch", speed);
   }
@@ -53,13 +54,18 @@ public class Climber extends SubsystemBase {
   public void setPistonPosition(Value position){
     pistonLeft.set(position);
     pistonRight.set(position);
-
+    pistonPosition = position;
   }
 
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
+    
+    if (pistonPosition == Value.kForward) {
+      SmartDashboard.putString("Piston", "Forward");
+    } else {
+      SmartDashboard.putString("Piston", "Reverse");
+    }
   }
 }

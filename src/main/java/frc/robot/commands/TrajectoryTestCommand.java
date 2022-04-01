@@ -28,13 +28,13 @@ public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
         new Pose2d(0, 0, new Rotation2d(0)), 
         List.of(
           new Translation2d(2, 0), 
-          new Translation2d(2, 2), 
+          new Translation2d(2, 2),
           new Translation2d(3, 0), 
           new Translation2d(5, 0), 
           new Translation2d(6, -2), 
           new Translation2d(5, 0), 
           new Translation2d(3, 1), 
-          new Translation2d(2, 1)), 
+          new Translation2d(2, 1)), \
         new Pose2d(0, 0, new Rotation2d(0)), 
         new TrajectoryConfig(
           CARACTERISATION.kMaxSpeedMetersPerSecond, 

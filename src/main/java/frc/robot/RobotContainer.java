@@ -44,12 +44,12 @@ public class RobotContainer {
   private final Lanceur lanceur = new Lanceur();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
+  
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-
     drivetrain.setDefaultCommand(new DrivetrainDriveCommand(drivetrain, driverController));
     gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, coDriverController));
     climber.setDefaultCommand(new TournerWinchsCommand(climber, driverController));
@@ -65,15 +65,15 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 180));
-    new JoystickButton(coDriverController, Button.kRightBumper.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
-    new JoystickButton(coDriverController, Button.kLeftBumper.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
-    new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
-    new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
-    new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
+    //new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 180));
+    new JoystickButton(driverController, Button.kX.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
+    new JoystickButton(driverController, Button.kY.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
+    //new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
+    //new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
+    //new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
-    new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
+    //new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
     
                   
                           

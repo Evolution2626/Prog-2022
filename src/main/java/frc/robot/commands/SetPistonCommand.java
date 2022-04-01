@@ -29,5 +29,6 @@ public class SetPistonCommand extends InstantCommand {
   @Override
   public void initialize() {
     climber.setPistonPosition(position);
+    System.out.println("Set piston");
   }
 }
