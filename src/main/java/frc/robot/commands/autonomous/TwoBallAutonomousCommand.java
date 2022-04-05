@@ -19,7 +19,7 @@ import frc.robot.subsystems.Lanceur;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TwoBallAutonomousCommand extends SequentialCommandGroup {
+public class TwoBallAutonomousCommand extends AutonomousCommand {
   /** Creates a new TwoBallAutonomousCommand. */
 
   private Drivetrain drivetrain;
@@ -27,10 +27,7 @@ public class TwoBallAutonomousCommand extends SequentialCommandGroup {
   private double distance;
   private Gobeur gobeur;
 
-  public enum StartingPosition{
-    NEXT_TO_RIGHT_PANEL, 
-    NETX_TO_LEFT_PANEL
-  }
+  
 
   public TwoBallAutonomousCommand(StartingPosition startPosition, Drivetrain drivetrain, Lanceur lanceur, Gobeur gobeur) {
     // Add your commands in the addCommands() call, e.g.
@@ -49,9 +46,7 @@ public class TwoBallAutonomousCommand extends SequentialCommandGroup {
     return new ParallelRaceGroup(command, new ShooterBallCommand(lanceur, distance));
   }
 
-  public ParallelRaceGroup executeForSeconds(Command command, double seconds){
-    return new ParallelRaceGroup(command, new WaitCommand(seconds));
-  }
+  
 
   
 

@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AlignTapePIDCommand;
@@ -16,12 +18,14 @@ import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.DivetrainTournerDegresCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
+import frc.robot.commands.ResetWinchPositionCommand;
 import frc.robot.commands.SetPistonCommand;
 import frc.robot.commands.SetPistonGobeurCommand;
 import frc.robot.commands.ShooterBallCommand;
 import frc.robot.commands.TournerWinchsCommand;
-import frc.robot.commands.TrajectoryTestCommand;
 import frc.robot.commands.autonomous.AutoTestCommand;
+import frc.robot.commands.autonomous.GoberUnBallonCommand;
+import frc.robot.commands.autonomous.AutonomousCommand.StartingPosition;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
@@ -46,6 +50,9 @@ public class RobotContainer {
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
   
 
+  private SendableChooser<StartingPosition> startPosition = new SendableChooser<>();
+  
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -54,6 +61,11 @@ public class RobotContainer {
     gobeur.setDefaultCommand(new GobeurTournerCommand(gobeur, coDriverController));
     climber.setDefaultCommand(new TournerWinchsCommand(climber, driverController));
     configureButtonBindings();
+
+    startPosition.addOption("Left Panel", StartingPosition.NEXT_TO_LEFT_PANEL);
+    startPosition.addOption("Right Panel", StartingPosition.NEXT_TO_RIGHT_PANEL);
+
+    SmartDashboard.putData("Starting Position", startPosition);
   
   }
 
@@ -65,15 +77,12 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-    //new JoystickButton(driverController, Button.kA.value).whenPressed(new DivetrainTournerDegresCommand(drivetrain, 180));
     new JoystickButton(driverController, Button.kX.value).whenPressed(new SetPistonCommand(climber, Value.kForward));
     new JoystickButton(driverController, Button.kY.value).whenPressed(new SetPistonCommand(climber, Value.kReverse));
-    //new JoystickButton(driverController, Button.kB.value).whenPressed(new TrajectoryTestCommand(drivetrain).fieldRelative());
-    //new JoystickButton(driverController, Button.kX.value).whileHeld(new AlignTapePIDCommand(drivetrain, limelight));
-    //new JoystickButton(driverController, Button.kY.value).whileHeld(new AllerVersBallonCommand(drivetrain, limelight));
+    new JoystickButton(driverController, Button.kB.value).whenPressed(new ResetWinchPositionCommand(climber, 0));
+    new JoystickButton(driverController, Button.kA.value).whenPressed(new ResetWinchPositionCommand(climber, 1));
     new JoystickButton(coDriverController, Button.kB.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
-    //new JoystickButton(coDriverController, Button.kX.value).toggleWhenPressed(new ShooterBallCommand(lanceur, limelight));
     
                   
                           
@@ -88,6 +97,6 @@ public class RobotContainer {
   
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return new AutoTestCommand(drivetrain);
+    return new GoberUnBallonCommand(drivetrain, gobeur, startPosition.getSelected());
   }
 }

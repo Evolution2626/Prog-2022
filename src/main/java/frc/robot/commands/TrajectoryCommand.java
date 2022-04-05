@@ -19,41 +19,14 @@ import frc.robot.subsystems.Drivetrain;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class TrajectoryTestCommand extends DrivetrainRamseteCommand {
-  public static String trajectoryJSON = "Test.wpilib.json";
+public class TrajectoryCommand extends DrivetrainRamseteCommand {
 
-  public TrajectoryTestCommand(Drivetrain drivetrain) {
-    super(drivetrain, trajectoryJSON
-      /*TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0, 0, new Rotation2d(0)), 
-        List.of(
-          new Translation2d(2, 0), 
-          new Translation2d(2, 2),
-          new Translation2d(3, 0), 
-          new Translation2d(5, 0), 
-          new Translation2d(6, -2), 
-          new Translation2d(5, 0), 
-          new Translation2d(3, 1), 
-          new Translation2d(2, 1)), \
-        new Pose2d(0, 0, new Rotation2d(0)), 
-        new TrajectoryConfig(
-          CARACTERISATION.kMaxSpeedMetersPerSecond, 
-          CARACTERISATION.kMaxAccelerationMetersPerSecondSquared
-        )
-        .setKinematics(CARACTERISATION.kDriveKinematics)
-        .addConstraint(
-          new DifferentialDriveVoltageConstraint(
-            new SimpleMotorFeedforward(
-              CARACTERISATION.ksVolts, 
-              CARACTERISATION.kvVoltsPerMeter
-            ), 
-            CARACTERISATION.kDriveKinematics, 
-            10
-          )
-        )
-      )*/
+
+  public TrajectoryCommand(Drivetrain drivetrain, String path) {
+    super(drivetrain, path
     );
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(drivetrain);
   }
 
   // Called when the command is initially scheduled.

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.util.Range;
 
 public class Climber extends SubsystemBase {
  
@@ -37,12 +38,25 @@ public class Climber extends SubsystemBase {
 
     pistonLeft = new DoubleSolenoid(8, PneumaticsModuleType.REVPH, Constants.PCM.PISTON_LEFT_FORWARD, Constants.PCM.PISTON_LEFT_REVERSE);
     pistonRight = new DoubleSolenoid(8, PneumaticsModuleType.REVPH, Constants.PCM.PISTON_RIGHT_FORWARD, Constants.PCM.PISTON_RIGHT_REVERSE);
-
+    resetWinchPosition(0);
+    resetWinchPosition(1);
   }
 
+  public double getWinchPosition(int winchNumber){
+    return winch[winchNumber].getEncoder().getPosition();
+  }
+
+  public void resetWinchPosition(int winchNumber){
+    winch[winchNumber].getEncoder().setPosition(0);
+  }
 
   public void tournerWinch(int numeroWinch, double speed){
-
+    if(numeroWinch == 0 && getWinchPosition(0) >= 0 && false && pistonPosition == Value.kForward) {
+      speed = Range.coerce(-1, 0, speed);
+    }
+    if (numeroWinch == 1 && false && getWinchPosition(1) >= 0) {
+      speed = Range.coerce(-1, 0, speed);
+    }
     winch[numeroWinch].set(speed);
     //winch[1].set(ControlMode.PercentOutput, speed);
     SmartDashboard.putNumber("Vitesse winch", speed);
@@ -69,5 +83,8 @@ public class Climber extends SubsystemBase {
     } else {
       SmartDashboard.putString("Piston", "Reverse");
     }
+    SmartDashboard.putNumber("WinchSpringPosition", getWinchPosition(0));
+    SmartDashboard.putNumber("WinchArmPosition", getWinchPosition(1));
+
   }
 }
