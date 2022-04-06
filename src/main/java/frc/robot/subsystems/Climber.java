@@ -40,6 +40,7 @@ public class Climber extends SubsystemBase {
     pistonRight = new DoubleSolenoid(8, PneumaticsModuleType.REVPH, Constants.PCM.PISTON_RIGHT_FORWARD, Constants.PCM.PISTON_RIGHT_REVERSE);
     resetWinchPosition(0);
     resetWinchPosition(1);
+    setPistonPosition(Value.kForward);
   }
 
   public double getWinchPosition(int winchNumber){
@@ -51,10 +52,10 @@ public class Climber extends SubsystemBase {
   }
 
   public void tournerWinch(int numeroWinch, double speed){
-    if(numeroWinch == 0 && getWinchPosition(0) >= 0 && false && pistonPosition == Value.kForward) {
+    if(numeroWinch == 0 && getWinchPosition(0) >= 270 && pistonPosition == Value.kForward) {
       speed = Range.coerce(-1, 0, speed);
     }
-    if (numeroWinch == 1 && false && getWinchPosition(1) >= 0) {
+    if (numeroWinch == 1 && getWinchPosition(1) >= 280) {
       speed = Range.coerce(-1, 0, speed);
     }
     winch[numeroWinch].set(speed);
