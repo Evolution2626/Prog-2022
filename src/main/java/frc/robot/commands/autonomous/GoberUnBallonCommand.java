@@ -5,6 +5,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.GobeurTournerCommand;
@@ -24,14 +25,14 @@ public class GoberUnBallonCommand extends AutonomousCommand {
   private static String pathToRightBall = "/output/pathToRightBall.wpilib.json";
 
   /** Creates a new GoberUnBallonCommand. */
-  public GoberUnBallonCommand(Drivetrain drivetrain, Gobeur gobeur, StartingPosition startPosition) {
+  public GoberUnBallonCommand(Drivetrain drivetrain, Gobeur gobeur, SendableChooser<StartingPosition> startPosition) {
     this.gobeur = gobeur;
     this.drivetrain = drivetrain;
     addRequirements(drivetrain, gobeur);
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
 
-    if (startPosition == StartingPosition.NEXT_TO_RIGHT_PANEL) {
+    if (startPosition.getSelected() == StartingPosition.NEXT_TO_RIGHT_PANEL) {
       addCommands(new TrajectoryCommand(drivetrain, pathToRightBall));
     } else {
       addCommands(new TrajectoryCommand(drivetrain, pathToLeftBall));

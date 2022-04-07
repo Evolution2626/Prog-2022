@@ -12,11 +12,11 @@ import frc.util.Range;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class DivetrainTournerDegresCommand extends PIDCommand {
+public class DrivetrainTournerDegresCommand extends PIDCommand {
 
   private Drivetrain drivetrain;
   /** Creates a new DivetrainTournerDegresCommand. */
-  public DivetrainTournerDegresCommand(Drivetrain drivetrain, double degrees) {
+  public DrivetrainTournerDegresCommand(Drivetrain drivetrain, double degrees) {
     super(
         // The controller that the command will use
         new PIDController(0.012, 0.0001, 0.0001),

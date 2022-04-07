@@ -55,7 +55,7 @@ public class Climber extends SubsystemBase {
     if(numeroWinch == 0 && getWinchPosition(0) >= 270 && pistonPosition == Value.kForward) {
       speed = Range.coerce(-1, 0, speed);
     }
-    if (numeroWinch == 1 && getWinchPosition(1) >= 280) {
+    if (numeroWinch == 1 && getWinchPosition(1) >= 300) {
       speed = Range.coerce(-1, 0, speed);
     }
     winch[numeroWinch].set(speed);
