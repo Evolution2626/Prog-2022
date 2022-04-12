@@ -4,31 +4,25 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Climber;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class SetPistonCommand extends InstantCommand {
+public class ResetWinchPositionCommand extends InstantCommand {
   private Climber climber;
-  private Value position;
-
-
-
-  public SetPistonCommand(Climber climber, Value position) {
-    this.climber = climber;
-    this.position = position;
-    addRequirements(climber);
-
+  private int winchNumber;
+  public ResetWinchPositionCommand(Climber climber, int winchNumber) {
     // Use addRequirements() here to declare subsystem dependencies.
+    this.climber = climber;
+    this.winchNumber = winchNumber;
+    addRequirements(climber);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    climber.setPistonPosition(position);
-    System.out.println("Set piston");
+    climber.resetWinchPosition(winchNumber);
   }
 }

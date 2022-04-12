@@ -41,10 +41,10 @@ public class Drivetrain extends SubsystemBase {
 
     gyro = new ADXRS450_Gyro(Port.kOnboardCS0);
 
-    frontRight.setInverted(true);
-    frontLeft.setInverted(false);
-    backRight.setInverted(true);
-    backLeft.setInverted(false);
+    frontRight.setInverted(false); // sur vrai robot true
+    frontLeft.setInverted(true); // sur vrai robot false
+    backRight.setInverted(true); 
+    backLeft.setInverted(false); 
 
     frontRight.setIdleMode(IdleMode.kBrake);
     frontLeft.setIdleMode(IdleMode.kBrake);
@@ -95,11 +95,11 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public double getLeftEncoderPositionCm(){
-    return getLeftEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
+    return getLeftEncodersPosition() / 10.71 * (Math.PI * 5.5705* 2.54); // circonference des roues
   }
 
   public double getRightEncoderPositionCm(){
-    return getRightEncodersPosition() / 10.71 * (Math.PI * 5.63 * 2.54); // circonference des roues
+    return getRightEncodersPosition() / 10.71 * (Math.PI * 5.5705* 2.54); // circonference des roues
   }
 
   public double getBothEncoderPositionCm(){

@@ -46,12 +46,10 @@ public class GobeurTournerCommand extends CommandBase {
   public void execute() {
     double speedController = speed;
     if (controller != null ) {
-      double speedLeft = controller.getLeftTriggerAxis();
-      double speedRight = controller.getRightTriggerAxis();
-      speedController = speedRight - speedLeft;
+      speedController = controller.getLeftY();
     }
 
-    gobeur.tournerGobeur(speedController);
+    gobeur.tournerGobeur(speedController * 0.50);
 
   }
 

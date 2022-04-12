@@ -8,7 +8,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.util.Range;
-
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
@@ -18,7 +17,7 @@ public class AvancerCmCommand extends PIDCommand {
   public AvancerCmCommand(Drivetrain drivetrain, double distanceCibleCM) {
     super(
         // The controller that the command will use
-        new PIDController(0.008, 0, 0),
+        new PIDController(0.0015, 0.0005, 0.00000),
         // This should return the measurement
         () -> drivetrain.getBothEncoderPositionCm(),
         // This should return the setpoint (can also be a constant)
@@ -26,10 +25,11 @@ public class AvancerCmCommand extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
-          
-          drivetrain.driveTank(Range.minCoerce(0.10, Range.coerce(0.25, output)), Range.minCoerce(0.10, Range.coerce(0.25, output)) );
+           
+          drivetrain.driveTank(Range.coerce(-0.2, 0.2, output), Range.coerce(-0.2, 0.2, output));
+        
         });
-
+      
         this.drivetrain = drivetrain;
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.

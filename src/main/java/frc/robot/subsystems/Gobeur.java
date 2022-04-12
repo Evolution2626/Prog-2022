@@ -5,21 +5,23 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Gobeur extends SubsystemBase {
-  private TalonSRX gobeur;
+  private VictorSPX gobeur;
   private DoubleSolenoid pistonLeft;
   private DoubleSolenoid pistonRight;
   /** Creates a new Gobeur. */
   public Gobeur() {
-    gobeur = new TalonSRX(Constants.CAN.MOTOR_GOBEUR);
-
+    gobeur = new VictorSPX(Constants.CAN.MOTOR_GOBEUR);
+    pistonLeft = new DoubleSolenoid(8,PneumaticsModuleType.REVPH, Constants.PCM.PISTON_GOBEUR_LEFT_FORWARD, Constants.PCM.PISTON_GOBEUR_LEFT_REVERSE);
+    pistonRight = new DoubleSolenoid(8,PneumaticsModuleType.REVPH, Constants.PCM.PISTON_GOBEUR_RIGHT_FORWARD, Constants.PCM.PISTON_GOBEUR_RIGHT_REVERSE);
   }
 
   public void tournerGobeur (double speed){

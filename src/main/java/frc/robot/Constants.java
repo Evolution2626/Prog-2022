@@ -21,10 +21,10 @@ public final class Constants {
         int FRONT_LEFT_MOTOR = 3;
         int BACK_RIGHT_MOTOR = 14;
         int BACK_LEFT_MOTOR = 2;
-        int[] MOTORS_WINCH = {10, 5, 6, 7};
-        int MOTOR_GOBEUR = 0;
-        int MOTEUR_LANCEUR_UN = 0;
-        int MOTEUR_LANCEUR_DEUX = 0;
+        int[] MOTORS_WINCH = {10, 5};  //5,6,7 are placeholder
+        int MOTOR_GOBEUR = 12;  //placeholder
+        int MOTEUR_LANCEUR_UN = 9;  //placeholder
+        int MOTEUR_LANCEUR_DEUX = 11;  //placeholder
     }
 
     public interface USB{
@@ -33,10 +33,16 @@ public final class Constants {
         
     }
     public interface PCM{
-        int PISTON_LEFT_FORWARD = 0;
-        int PISTON_LEFT_REVERSE = 1;
-        int PISTON_RIGHT_FORWARD = 2;
-        int PISTON_RIGHT_REVERSE = 3;
+        int PISTON_LEFT_FORWARD = 6;
+        int PISTON_LEFT_REVERSE = 7;
+        int PISTON_RIGHT_FORWARD = 8;
+        int PISTON_RIGHT_REVERSE = 9;
+
+        int PISTON_GOBEUR_LEFT_FORWARD = 5;
+        int PISTON_GOBEUR_LEFT_REVERSE = 4;
+        int PISTON_GOBEUR_RIGHT_FORWARD = 15;
+        int PISTON_GOBEUR_RIGHT_REVERSE = 12;
+ 
 
     }
 
@@ -45,12 +51,12 @@ public final class Constants {
     }
 
     public interface CARACTERISATION {
-        double ksVolts = 0.23372;
-        double kvVoltsPerMeter = 3.0244;
-        double kaVoltsSquarePerMeter = 0.36913;
+        double ksVolts = 0.2496;
+        double kvVoltsPerMeter = 0.26883;
+        double kaVoltsSquarePerMeter = 0.037066;
 
-        double kpDriveVelocity = 0.00061519;
-        double trackWidthMeters = 0.605;
+        double kpDriveVelocity = 0.00007182;
+        double trackWidthMeters = 0.53;
 
         DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(trackWidthMeters);
 
