@@ -21,8 +21,8 @@ public final class Constants {
         int FRONT_LEFT_MOTOR = 3;
         int BACK_RIGHT_MOTOR = 14;
         int BACK_LEFT_MOTOR = 2;
-        int[] MOTORS_WINCH = {10, 5};  //5,6,7 are placeholder
-        int MOTOR_GOBEUR = 12;  //placeholder
+        int[] MOTORS_WINCH = {10, 5}; 
+        int MOTOR_GOBEUR = 12;  
         int MOTEUR_LANCEUR_UN = 9;  //placeholder
         int MOTEUR_LANCEUR_DEUX = 11;  //placeholder
     }

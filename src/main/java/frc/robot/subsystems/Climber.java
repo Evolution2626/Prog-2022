@@ -59,14 +59,9 @@ public class Climber extends SubsystemBase {
       speed = Range.coerce(-1, 0, speed);
     }
     winch[numeroWinch].set(speed);
-    //winch[1].set(ControlMode.PercentOutput, speed);
     SmartDashboard.putNumber("Vitesse winch", speed);
   }
 
-  public void tournerWinchPiston(double speed){
-   // winch[2].set(ControlMode.PercentOutput, speed);
-    //winch[3].set(ControlMode.PercentOutput, speed);
-  }
 
   public void setPistonPosition(Value position){
     pistonLeft.set(position);
