@@ -19,15 +19,11 @@ import frc.robot.subsystems.Gobeur;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class GoberUnBallonCommand extends AutonomousCommand {
 
-  private Drivetrain drivetrain;
-  private Gobeur gobeur;
   private static String pathToLeftBall = "/output/pathToLeftBall.wpilib.json";
   private static String pathToRightBall = "/output/pathToRightBall.wpilib.json";
 
   /** Creates a new GoberUnBallonCommand. */
   public GoberUnBallonCommand(Drivetrain drivetrain, Gobeur gobeur, SendableChooser<StartingPosition> startPosition) {
-    this.gobeur = gobeur;
-    this.drivetrain = drivetrain;
     addRequirements(drivetrain, gobeur);
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());

@@ -18,6 +18,7 @@ import frc.robot.commands.ResetWinchPositionCommand;
 import frc.robot.commands.SetPistonCommand;
 import frc.robot.commands.SetPistonGobeurCommand;
 import frc.robot.commands.TournerWinchsCommand;
+import frc.robot.commands.autonomous.AvancerAutoCommand;
 import frc.robot.commands.autonomous.GoberUnBallonCommand;
 import frc.robot.commands.autonomous.ShooterEtGoberUneBallCommand;
 import frc.robot.commands.autonomous.ShooterUneBallCommand;
@@ -26,8 +27,6 @@ import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Gobeur;
 import frc.robot.subsystems.Lanceur;
-import frc.robot.subsystems.Limelight;
-
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -40,7 +39,6 @@ public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain();
   private final Gobeur gobeur = new Gobeur();
   private final Climber climber = new Climber();
-  private final Limelight limelight = new Limelight();
   private final Lanceur lanceur = new Lanceur();
   private final XboxController driverController = new XboxController(Constants.USB.DRIVER_CONTROLLER);
   private final XboxController coDriverController = new XboxController(Constants.USB.CO_DRIVER_CONTROLLER);
@@ -65,6 +63,7 @@ public class RobotContainer {
     autoChooser.addOption("GoberUnBallon", new GoberUnBallonCommand(drivetrain, gobeur, startPositionChooser));
     autoChooser.addOption("LancerUnBallon", new ShooterUneBallCommand(drivetrain, gobeur, lanceur));
     autoChooser.addOption("ShooterEtGoberBallon", new ShooterEtGoberUneBallCommand(drivetrain, gobeur, lanceur, startPositionChooser));
+    autoChooser.addOption("AvancerSeulement", new AvancerAutoCommand(drivetrain, 300));
 
     SmartDashboard.putData("Starting Position", startPositionChooser);
     SmartDashboard.putData("Auto Chooser", autoChooser);

@@ -4,8 +4,6 @@
 
 package frc.robot.commands.autonomous;
 
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.subsystems.Drivetrain;
 
@@ -14,23 +12,19 @@ import frc.robot.subsystems.Drivetrain;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoTestCommand extends SequentialCommandGroup {
+public class AvancerAutoCommand extends AutonomousCommand {
   
-  private Drivetrain drivetrain;
-  
-  private double distance ;
  
   
   
   
   /** Creates a new AutoTestCommand. */
-  public AutoTestCommand(Drivetrain drivetrain) {
+  public AvancerAutoCommand(Drivetrain drivetrain, double distance) {
    
-   this.drivetrain = drivetrain;
 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands( new AvancerCmCommand(drivetrain, 400));
+    addCommands( new AvancerCmCommand(drivetrain, distance));
     addRequirements(drivetrain);
   }
 

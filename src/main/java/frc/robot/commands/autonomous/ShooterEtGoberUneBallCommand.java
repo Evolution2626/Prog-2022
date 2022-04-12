@@ -17,15 +17,9 @@ import frc.robot.subsystems.Lanceur;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class ShooterEtGoberUneBallCommand extends AutonomousCommand {
   /** Creates a new ShooterEtGoberUneBallCommand. */
-  private Drivetrain drivetrain;
-  private Gobeur gobeur;
-  private Lanceur lanceur;
 
   /** Creates a new GoberUnBallonCommand. */
   public ShooterEtGoberUneBallCommand(Drivetrain drivetrain, Gobeur gobeur, Lanceur lanceur, SendableChooser<StartingPosition> startPosition) {
-    this.gobeur = gobeur;
-    this.drivetrain = drivetrain;
-    this.lanceur = lanceur;
     addRequirements(drivetrain, gobeur);
   
     addCommands(

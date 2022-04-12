@@ -16,15 +16,9 @@ import frc.robot.subsystems.Lanceur;
 public class ShooterUneBallCommand extends AutonomousCommand {
   /** Creates a new ShooterUneBallCommand. */
 
-  private Drivetrain drivetrain;
-  private Gobeur gobeur;
-  private Lanceur lanceur;
 
   /** Creates a new GoberUnBallonCommand. */
   public ShooterUneBallCommand(Drivetrain drivetrain, Gobeur gobeur, Lanceur lanceur) {
-    this.gobeur = gobeur;
-    this.drivetrain = drivetrain;
-    this.lanceur = lanceur;
     addRequirements(drivetrain, gobeur);
   
     // addCommands(new FooCommand(), new BarCommand());

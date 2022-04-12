@@ -8,7 +8,6 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AvancerCmCommand;
 import frc.robot.commands.GobeurTournerCommand;
 import frc.robot.commands.ShooterBallCommand;
@@ -22,19 +21,15 @@ import frc.robot.subsystems.Lanceur;
 public class TwoBallAutonomousCommand extends AutonomousCommand {
   /** Creates a new TwoBallAutonomousCommand. */
 
-  private Drivetrain drivetrain;
   private Lanceur lanceur;
   private double distance;
-  private Gobeur gobeur;
 
   
 
   public TwoBallAutonomousCommand(StartingPosition startPosition, Drivetrain drivetrain, Lanceur lanceur, Gobeur gobeur) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    this.drivetrain = drivetrain;
     this.lanceur = lanceur;
-    this.gobeur = gobeur;
 
     addCommands(tournerLanceurWhileCommand(new SequentialCommandGroup(
       new AvancerCmCommand(drivetrain, -distance), 
