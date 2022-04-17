@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testInit() {
     // Cancels all running commands at the start of test mode.
-    compressor.enableAnalog(60, 120);
+    compressor.enableAnalog(120, 120);
 
     CommandScheduler.getInstance().cancelAll();
   }

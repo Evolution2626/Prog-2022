@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.commands.ClimberAutoCommand;
 import frc.robot.commands.DrivetrainDriveCommand;
 import frc.robot.commands.GobeurTournerCommand;
 import frc.robot.commands.ResetWinchPositionCommand;
@@ -84,9 +86,7 @@ public class RobotContainer {
     new JoystickButton(coDriverController, Button.kA.value).whenPressed(new ResetWinchPositionCommand(climber, 1));
     new JoystickButton(coDriverController, Button.kStart.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kForward));
     new JoystickButton(coDriverController, Button.kBack.value).whenPressed(new SetPistonGobeurCommand(gobeur, Value.kReverse));
-    
-                  
-                          
+    new POVButton(coDriverController, 0).whileHeld(new ClimberAutoCommand(climber), true);
 
   }
 

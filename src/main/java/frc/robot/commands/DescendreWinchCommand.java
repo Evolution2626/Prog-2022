@@ -1,0 +1,57 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
+
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Climber;
+
+public class DescendreWinchCommand extends CommandBase {
+  /** Creates a new MonterClimberBoxCommand. */
+
+  private Climber climber;
+  private int winchNumber;
+  private double winchMax;
+
+  public DescendreWinchCommand(int winchNumber, Climber climber, double winchMax) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.climber = climber;
+    this.winchNumber = winchNumber;
+    this.winchMax = winchMax;
+    addRequirements(climber);
+  }
+
+  public DescendreWinchCommand(int winchNumber, Climber climber) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.climber = climber;
+    this.winchNumber = winchNumber;
+    addRequirements(climber);
+  }
+
+  // Called when the command is initially scheduled.
+  @Override
+  public void initialize() {}
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    climber.tournerWinch(winchNumber, -0.75);
+  }
+
+  // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    climber.tournerWinch(winchNumber, 0);
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+    if (winchNumber == 0) {
+      return climber.getWinchPosition(winchNumber) <= winchMax;
+    } else {
+      return climber.getWinchPosition(winchNumber) <= 0;
+    }
+  }
+}
