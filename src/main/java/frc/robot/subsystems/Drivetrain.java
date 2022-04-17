@@ -116,8 +116,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void driveTank(double left, double right){
-    backRight.set(right);
-    backLeft.set(left);
+    drive.tankDrive(left, right);
   }
 
   public void driveTankVolts(double left, double right){
