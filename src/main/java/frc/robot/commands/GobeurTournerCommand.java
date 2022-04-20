@@ -49,7 +49,7 @@ public class GobeurTournerCommand extends CommandBase {
       speedController = controller.getLeftY();
     }
 
-    gobeur.tournerGobeur(speedController * 0.50);
+    gobeur.tournerGobeur(speedController * 0.75);
 
   }
 
